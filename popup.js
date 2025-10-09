@@ -11,7 +11,8 @@ const casualizedDiv = document.getElementById("casualized");
 const copyBtn = document.getElementById("copyBtn");
 const copyFormalBtn = document.getElementById("copyFormalBtn");
 const copyCasualBtn = document.getElementById("copyCasualBtn");
-const insertBtn = document.getElementById("insertBtn");
+const insertBtnFormal = document.getElementById("insertBtnFormal");
+const insertBtnCasual = document.getElementById("insertBtnCasual");
 const errorDiv = document.getElementById("error");
 
 // const SERVER_URL = "http://localhost:8080/api";
@@ -186,7 +187,7 @@ copyCasualBtn.addEventListener("click", async () => {
   }
 });
 
-insertBtn.addEventListener("click", async () => {
+insertBtnFormal.addEventListener("click", async () => {
   errorDiv.textContent = "";
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   if (!tab) {
@@ -195,6 +196,102 @@ insertBtn.addEventListener("click", async () => {
   }
 
   const textToInsert = formalizedDiv.innerText;
+  if (!textToInsert) {
+    errorDiv.textContent = "Nothing to insert.";
+    return;
+  }
+
+  try {
+    // Focus the window then the tab so the page is active when we run the injected code.
+    // This also closes the popup, which is fine because we will execute the script directly in the tab.
+    await chrome.windows.update(tab.windowId, { focused: true });
+    await chrome.tabs.update(tab.id, { active: true });
+
+    // Execute insertion code directly inside the page context.
+    const results = await chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: (text) => {
+        // Find probable editable element (try known stable selectors, fallbacks)
+        const candidateSelectors = [
+          '[contenteditable="true"][data-tab="10"]',
+          '[contenteditable="true"][data-testid="conversation-compose-box-input"]', // possible alternative
+          '[contenteditable="true"]',
+        ];
+        let editable = null;
+        for (const sel of candidateSelectors) {
+          editable = document.querySelector(sel);
+          if (editable) break;
+        }
+        // fallback: find contenteditable that seems like input by aria-placeholder/label
+        if (!editable) {
+          editable = Array.from(
+            document.querySelectorAll('[contenteditable="true"]')
+          ).find(
+            (el) =>
+              el.getAttribute("aria-label") === "Type a message" ||
+              el.getAttribute("aria-placeholder") === "Type a message"
+          );
+        }
+
+        if (!editable) {
+          return { success: false, error: "Editable input not found" };
+        }
+
+        editable.focus();
+
+        // Build a synthetic paste event with clipboard data set to text
+        const dt = new DataTransfer();
+        dt.setData("text/plain", text);
+        let pasteEvent;
+        try {
+          pasteEvent = new ClipboardEvent("paste", {
+            bubbles: true,
+            cancelable: true,
+            clipboardData: dt,
+          });
+        } catch (e) {
+          // Some browsers may not allow new ClipboardEvent; fallback to a generic Event and attach clipboardData if possible
+          pasteEvent = new Event("paste", { bubbles: true, cancelable: true });
+          pasteEvent.clipboardData = dt;
+        }
+
+        editable.dispatchEvent(pasteEvent);
+
+        // Also dispatch an input event in case WhatsApp listens to it
+        editable.dispatchEvent(
+          new InputEvent("input", { bubbles: true, cancelable: true })
+        );
+
+        return { success: true };
+      },
+      args: [textToInsert],
+    });
+
+    // results is an array of injection results (one per frame); use first
+    const result = (results && results[0] && results[0].result) || {};
+    if (result.success) {
+      // The popup is likely closed after focusing the tab; if it still exists, show status.
+      // We'll try to update UI if popup still open.
+      status.textContent = "Inserted!";
+      setTimeout(() => (status.textContent = ""), 1500);
+    } else {
+      errorDiv.textContent = "Insert failed: " + (result.error || "unknown");
+    }
+  } catch (err) {
+    console.error("Insert error:", err);
+    errorDiv.textContent = "Insert failed: " + (err?.message || String(err));
+  }
+});
+
+insertBtnCasual.addEventListener("click", async () => {
+  errorDiv.textContent = "";
+  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  if (!tab) {
+    errorDiv.textContent = "No active tab found.";
+    return;
+  }
+
+  const textToInsert = casualizedDiv.innerText;
   if (!textToInsert) {
     errorDiv.textContent = "Nothing to insert.";
     return;
