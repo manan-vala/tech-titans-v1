@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Convert Message</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+    <h3>WhatsApp messages</h3>
+    <button id="overlayBtn">Click Me</button>
+    <div id="status">Click "Fetch" to read the message from this tab.</div>
+    <button id="fetchBtn">Fetch</button>
+
+    <div id="fetchedWrap" class="hidden">
+        <h4>Fetched</h4>
+        <div id="result"></div>
+        <div>
+            <button id="formalizeBtn">Make it formal</button>
+            <button id="casualizeBtn">Make it casual</button>
+        </div>
+        <button id="copyBtn">Copy</button>
+        <button id="insertBtn">Insert into chat</button>
+    </div>
+
+    <div id="formalizedWrap" style="display: none;">
+        <h4>Formalized</h4>
+        <div id="formalized"></div>
+        <button id="copyFormalBtn">Copy</button>
+    </div>
+
+    <div id="casualizedWrap" style="display: none;">
+        <h4>Casualized</h4>
+        <div id="casualized"></div>
+        <button id="copyCasualBtn">Copy</button>
+    </div>
+
+    <div id="error" style="color: red; margin-top:8px;"></div>
+
+    <script src="popup.js"></script>
+    <script src="popup-overlay.js"></script>
+</body>
+
+</html>

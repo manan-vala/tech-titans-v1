@@ -1,0 +1,32 @@
+# Node modules (if you use npm/yarn for tooling)
+node_modules/
+
+# Build output (if you use a build system)
+dist/
+build/
+
+# OS/Editor files
+.DS_Store
+Thumbs.db
+*.log
+
+# VSCode settings
+.vscode/
+
+# Chrome extension artifacts
+*.crx
+*.pem
+
+# Ignore API keys or secrets (if you ever store them locally)
+*.env
+.env.local
+
+# Ignore backup files
+*~
+*.bak
+
+# Ignore onboard API key storage (if you ever export/test locally)
+onboard/*.key
+
+# Ignore coverage reports
+coverage/

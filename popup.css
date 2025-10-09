@@ -1,0 +1,23 @@
+body {
+  font-family: Arial, sans-serif;
+  min-width: 300px;
+  padding: 12px;
+}
+
+#msg {
+  white-space: pre-wrap;
+  margin-top: 8px;
+}
+
+.loading {
+  opacity: 0.6;
+}
+
+.error {
+  color: #b00020;
+}
+
+button {
+  padding: 6px 10px;
+  margin-top: 8px;
+}
