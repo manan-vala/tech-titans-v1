@@ -8,10 +8,16 @@
 </head>
 
 <body>
-    <h3>WhatsApp messages</h3>
-    <button id="overlayBtn">Click Me</button>
-    <div id="status">Click "Fetch" to read the message from this tab.</div>
-    <button id="fetchBtn">Fetch</button>
+    <h2 class="head bbh-sans-hegarty-regular"><img src="./logo.jpeg" alt="" class="logo"><span>Lisa</span></h2>
+    <div class="overlayDisplay">
+        <p>Display overlay</p>
+        <button id="overlayBtn">Click Me</button>
+    </div>
+    <div class="divide"></div>
+    <div class="fetchSection">
+        <div id="status">Click "Fetch" to read the message from this tab.</div>
+        <button id="fetchBtn">Fetch</button>
+    </div>
 
     <div id="fetchedWrap" class="hidden">
         <h4>Fetched</h4>
@@ -24,14 +30,14 @@
     </div>
 
     <div id="formalizedWrap" style="display: none;">
-        <h4>Formalized</h4>
+        <p>Formalized</p>
         <div id="formalized"></div>
         <button id="copyFormalBtn">Copy</button>
         <button id="insertBtnFormal">Insert into chat</button>
     </div>
 
     <div id="casualizedWrap" style="display: none;">
-        <h4>Casualized</h4>
+        <p>Casualized</p>
         <div id="casualized"></div>
         <button id="copyCasualBtn">Copy</button>
         <button id="insertBtnCasual">Insert into chat</button>

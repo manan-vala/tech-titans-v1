@@ -8,13 +8,35 @@
 </head>
 
 <body>
-    <h2>Welcome! Enter your API key</h2>
+    <div class="main">
+        <div class="head">
+            <h1 id="heading" class="bbh-sans-hegarty-regular"><span>LISA</span></h1>
+            <p class="description">Make your writing smooth and easy !!!</p>
+        </div>
+        <div class="form">
+            <h1>Welcome !!</h1>
+            <form id="keyForm">
+                <div class="container">
+                    <label for="apiKey">Enter your API Key :</label>
+                    <input id="apiKey" name="apiKey" type="password" placeholder="Paste API key here" required />
+                </div>
+                <br>
+                <button type="submit">Save</button>
+                <p id="status"></p>
+            </form>
+        </div>
+        <div class="guide">
+            <h3>Guide</h3>
+        </div>
+    </div>
+
+    <!-- <h2>Welcome! Enter your API key</h2>
     <form id="keyForm">
         <label for="apiKey">Open AI API Key</label><br />
         <input id="apiKey" name="apiKey" type="password" placeholder="paste API key here" required />
         <button type="submit">Save</button>
     </form>
-    <p id="status"></p>
+    <p id="status"></p> -->
 
     <script src="onboard.js"></script>
 </body>

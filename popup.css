@@ -1,7 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+.bbh-sans-hegarty-regular {
+  font-family: "BBH Sans Hegarty", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
   min-width: 300px;
   padding: 12px;
+  background-color: #111;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
 }
 
 #msg {
@@ -13,11 +30,54 @@ body {
   opacity: 0.6;
 }
 
-.error {
-  color: #b00020;
-}
+/* #error {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #222;
+  color: red;
+} */
 
 button {
   padding: 6px 10px;
   margin-top: 8px;
+  border-radius: 5px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.logo {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+
+#formalizedWrap,
+#casualizedWrap {
+  margin-top: 6px;
+  background-color: #222;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+#fetchSection {
+  margin-top: 10px;
+}
+
+.divide {
+  margin: 20px 0px;
+  border: 1px solid gray;
 }
