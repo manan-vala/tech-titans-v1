@@ -1,44 +1,83 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <title>Welcome — Enter API Key</title>
-    <link rel="stylesheet" href="onboardStyle.css">
-</head>
+    <link rel="stylesheet" href="onboardStyle.css" />
+  </head>
 
-<body>
+  <body>
     <div class="main">
-        <div class="head">
-            <h1 id="heading" class="bbh-sans-hegarty-regular"><span>LISA</span></h1>
-            <p class="description">Make your writing smooth and easy !!!</p>
-        </div>
-        <div class="form">
-            <h1>Welcome !!</h1>
-            <form id="keyForm">
-                <div class="container">
-                    <label for="apiKey">Enter your API Key :</label>
-                    <input id="apiKey" name="apiKey" type="password" placeholder="Paste API key here" required />
-                </div>
-                <br>
-                <button type="submit">Save</button>
-                <p id="status"></p>
-            </form>
-        </div>
-        <div class="guide">
-            <h3>Guide</h3>
-        </div>
+      <div class="head">
+        <h1 id="heading" class="bbh-sans-hegarty-regular"><span>LISA</span></h1>
+        <p class="description">Make your writing smooth and easy !!!</p>
+      </div>
+
+      <div class="form">
+        <h1>Welcome !!</h1>
+        <p class="guide-status-message">
+          Your API key is stored
+          <i style="font-weight: bold">only on your device</i> for absolute
+          security.
+        </p>
+        <form id="keyForm">
+          <div class="container">
+            <label for="apiKey">Enter your API Key :</label>
+            <input
+              id="apiKey"
+              name="apiKey"
+              type="password"
+              placeholder="Paste API key here"
+              required
+            />
+          </div>
+          <br />
+          <button type="submit" class="primary-btn">Save Securely</button>
+          <p id="status" class="status-message"></p>
+
+          <p class="refresh-warning">
+            <i><b>IMPORTANT</b></i
+            >: After saving your key, you must refresh your WhatsApp Web tab
+            once for the extension to fully activate!
+          </p>
+        </form>
+
+        <p class="discoverability-link">
+          Need help? View the
+          <a href="#guide-section">Full Feature Guide</a> below!
+        </p>
+      </div>
+
+      <div class="guide" id="guide-section">
+        <h3>Guide & Key Features</h3>
+        <ul>
+          <li>
+            <strong>1. Real-Time Suggestions:</strong>
+            <p>
+              Real-time suggestions appear as you type. This feature is
+              optimized with a 500ms debounce for speed and a 2 second throttle
+              for cost efficiency.
+            </p>
+          </li>
+          <li>
+            <strong>2. Copy/Accept Suggestion:</strong>
+            <p>
+              Quickly copy a suggestion using the shortcut:
+              <b>Ctrl/Cmd + Shift + Y</b>
+              and then paste it in the input box.
+            </p>
+          </li>
+          <li>
+            <strong>3. Tone Adaptation (Two-Tier):</strong>
+            <p>
+              Use the popup to either set your real-time tone (Formal or Casual)
+              or use the refinement tool to rewrite a full draft before sending.
+            </p>
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <!-- <h2>Welcome! Enter your API key</h2>
-    <form id="keyForm">
-        <label for="apiKey">Open AI API Key</label><br />
-        <input id="apiKey" name="apiKey" type="password" placeholder="paste API key here" required />
-        <button type="submit">Save</button>
-    </form>
-    <p id="status"></p> -->
-
     <script src="onboard.js"></script>
-</body>
-
+  </body>
 </html>
